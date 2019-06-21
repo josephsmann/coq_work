@@ -167,10 +167,12 @@ Show Proof.
 *)
 Qed.
 
+Check and_ind.
+
 Theorem T2a: forall A1 A2 C : Prop, 
 (A1 -> C) /\ (A2 -> C) -> (A1 \/ A2 -> C).
 Proof.
-intros A1 A2 C.
+intros.
 case H0.
   elim H.
 
@@ -207,9 +209,57 @@ Show Proof.
 *)
 Qed.
 
+Theorem T3: forall A B: Prop, A /\ B -> B.
+Proof.
+intros A B.
+intros Conj.
+destruct Conj as [L R].
+Show Proof.
+exact R.
+Show Proof.
+(*
+(fun (A B : Prop) (Conj : A /\ B) =>
+ match Conj with
+ | conj _ R => R
+ end)
+*)
+Qed.
 
+Check and_ind.
 
+Theorem T3a: forall A B: Prop, A /\ B -> B.
+Proof.
+intros A B.
+Show Proof.
+intros Conj.
+elim Conj.
+Show Proof.
+intros.
+Show Proof.
+exact H0.
+Show Proof.
+(*
+(fun (A B : Prop) (Conj : A /\ B) =>
+ and_ind (fun (_ : A) (H0 : B) => H0) Conj)
+*)
 
+Qed.
+
+Print and_ind.
+
+(*
+and_ind = 
+fun (A B P : Prop) (f : A -> B -> P) (a : A /\ B) =>
+match a with
+| conj x x0 => f x x0
+end
+     : forall A B P : Prop, (A -> B -> P) -> A /\ B -> P
+
+Arguments A, B, P are implicit
+Argument scopes are [type_scope type_scope type_scope
+  function_scope _]
+
+*)
 
 
 
