@@ -70,6 +70,10 @@ Proof.
   Show Proof.
 Qed.
 
+(* Check and Print are your friends.. *)
+Check and_ind.
+Print and_ind.
+
 Goal (forall A: Prop, ~(A/\~A)).
 Proof.
 exact
@@ -133,6 +137,22 @@ exact
           match (na a) return B with end  (* what kind of wacky voodoo is this?? *)
       | conj (or_intror b) na => b
     end).
+Qed.
+
+
+Print Nat.
+
+(* Require Import Ring. *)
+Goal (forall x:nat, 2 * x = x + x).
+Proof.
+induction x.
+simpl.
+reflexivity.
+SearchRewrite (_ * S _).
+unfold Nat.mul .
+SearchRewrite(_ + 0).
+rewrite <- plus_n_O .
+reflexivity.
 Qed.
 
   
