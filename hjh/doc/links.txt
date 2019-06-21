@@ -1,0 +1,14 @@
+https://www.cs.cornell.edu/courses/cs3110/2018sp/a5/coq-tactics-cheatsheet.html
+https://coq.inria.fr/tutorial-nahas
+
+Basic predicate calculus:
+https://coq.inria.fr/tutorial/1-basic-predicate-calculus
+
+https://pjreddie.com/coq-tactics/
+
+https://coq.inria.fr/tutorial-nahas
+
+Mizar <-> Coq
+https://math.stackexchange.com/questions/2463029/importing-translating-mizar-into-coq-axiomatic-set-theory-into-constructive-t
+
+https://www.cs.kent.ac.uk/people/staff/sjt/TTFP/
