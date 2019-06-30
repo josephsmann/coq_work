@@ -12,3 +12,8 @@ Mizar <-> Coq
 https://math.stackexchange.com/questions/2463029/importing-translating-mizar-into-coq-axiomatic-set-theory-into-constructive-t
 
 https://www.cs.kent.ac.uk/people/staff/sjt/TTFP/
+
+https://github.com/coq/coq/wiki/MatchAsInReturn
+
+Functional programmingin Coq (aka Galina).
+https://www.seas.upenn.edu/~cis500/cis500-f13/sf/Basics.html
