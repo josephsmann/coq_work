@@ -24,6 +24,15 @@ Proof.
   - destruct H as [a [b c]].
 exact c.
 Show Proof.
+(* (fun (A B C : Prop) (H : A /\ B /\ C) =>
+ conj 
+ match H with
+      | conj a (conj b _) => conj a b
+      end 
+  match H with
+      | conj _ (conj _ c) => c
+    end)
+ *)
 Qed.
 
 Lemma E1p24f:  (forall A B C:Prop, A/\(B/\C)->(A/\B)/\C).
@@ -35,6 +44,14 @@ conj
   end
   match H with
     | conj a (conj b c) => c
+  end).
+Qed.
+
+Lemma E1p24f2:  (forall A B C:Prop, A/\(B/\C)->(A/\B)/\C).
+Proof.
+  exact (fun (A B C: Prop)(H: A/\(B/\C)) =>
+  match H with
+    | conj a (conj b c) => (conj (conj a b) c)
   end).
 Qed.
 
@@ -50,6 +67,18 @@ Proof.
   exact (I1 a).
   exact (I2 c).
   Show Proof.
+Qed.
+
+Goal (forall A B C D: Prop,(A->B)/\(C->D)/\A/\C -> B/\D).
+Proof.
+  intros.
+  destruct H as [I1 [I2 [a c]]].
+  exact (conj (I1 a) (I2 c)).
+  Show Proof.
+(*   (fun (A B C D : Prop) (H : (A -> B) /\ (C -> D) /\ A /\ C) =>
+ match H with
+ | conj I1 (conj I2 (conj a c)) => conj (I1 a) (I2 c)
+ end). *)
 Qed.
 
 Goal (forall A B C D: Prop,(A->B)/\(C->D)/\A/\C -> B/\D).
