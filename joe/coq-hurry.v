@@ -170,6 +170,40 @@ Qed.
  
 
 Print Nat.
+(*  (fun (A B C : Prop) (H : A /\ B /\ C) =>
+ conj 
+ match H with
+      | conj a (conj b _) => conj a b
+      end 
+  match H with
+      | conj _ (conj _ c) => c
+    end)
+ *)
+
+Definition q:= forall (n m : nat) ,  n = m -> Prop.
+Check nat_ind.
+Print q.
+Require Import PeanoNat.
+
+
+Print eq_nat.
+
+Compute q 2 3.
+Compute JimProp (2=3).
+
+Goal forall x:Prop, (JimProp x).
+Proof.
+unfold JimProp.
+Show Proof.
+Qed.
+
+Compute JimProp 2.
+
+
+Compute nat_ind (nat_eq).
+
+
+
 
 (* Require Import Ring. *)
 Goal (forall x:nat, 2 * x = x + x).
@@ -177,15 +211,40 @@ Proof.
 induction x.
 simpl.
 reflexivity.
-SearchRewrite (_ * S _).
+(* SearchRewrite (_ * S _). *)
 unfold Nat.mul .
-SearchRewrite(_ + 0).
+(* SearchRewrite(_ + 0). *)
 rewrite <- plus_n_O .
+Show Proof.
+(* 
+(fun x : nat =>
+ nat_ind (fun x0 : nat => 2 * x0 = x0 + x0) eq_refl
+   (fun (x0 : nat) (IHx : 2 * x0 = x0 + x0) =>
+    eq_ind (S x0) (fun n : nat => S x0 + n = S x0 + S x0) ?Goal@{x:=x0} (S x0 + 0) (plus_n_O (S x0)))
+   x)
+ *)
 reflexivity.
 Show Proof.
+
+(* 
+(fun x : nat =>
+ nat_ind 
+    (fun x0 : nat => 2 * x0 = x0 + x0) 
+    eq_refl
+        (fun (x0 : nat) (_ : 2 * x0 = x0 + x0) =>
+              eq_ind 
+                  (S x0) 
+                  (fun n : nat => S x0 + n = S x0 + S x0) 
+              eq_refl 
+                  (S x0 + 0) 
+                  (plus_n_O (S x0))) 
+x) 
+
+*)
 Qed.
 
-(*
+
+Definition ff (x: nat) :=
  (fun x : nat =>
  nat_ind 
     (fun x0 : nat => 2 * x0 = x0 + x0) 
@@ -197,9 +256,20 @@ Qed.
           eq_refl 
           (S x0 + 0) 
           (plus_n_O (S x0))) 
- x)
- 
- *)
+ x).
+
+Compute ((ff 4) 3).
+
+Print plus_O_n.
+
+Check nat_ind.
+
+(* nat_ind
+     : forall P : nat -> Prop, P 0 -> (forall n : nat, P n -> P (S n)) -> forall n : nat, P n *)
+Check eq_ind.
+Print eq_ind.
+Print eq_refl.
+
 
 Print nat_ind. (*  3 args: P: nat->Prop, f:P 0, f0: forall n P n -> P S n *)
 Print eq_ind. (* 3 args   : forall (A : Type) (x : A) (P : A -> Prop), P x -> forall y : A, x = y -> P y*)

@@ -290,8 +290,17 @@ Proof.
   intros proof_of_A.
   pose (proof_of_A_or_B := or_introl proof_of_A: A \/ B).
   exact proof_of_A_or_B.
+  Show Proof.
+(*   (fun (A B : Prop) (proof_of_A : A) =>
+ let proof_of_A_or_B : A \/ B := or_introl proof_of_A : A \/ B in proof_of_A_or_B) *)
 Qed.
 
+Goal (forall A B: Prop, A -> A \/ B).
+Proof.
+  exact (fun (a b: Prop) (Pa: a) => or_introl Pa).
+Qed.
+
+Print or_introl.
 
 Theorem right_or : (forall A B : Prop, B -> A \/ B).
 Proof.
@@ -360,7 +369,7 @@ Proof.
   intros A B.
   intros A_and_B.
   destruct A_and_B as [ proof_of_A proof_of_B].
-  refine (conj _ _).
+  refine (conj _ _). (* or split *)
     exact proof_of_B.
 
     exact proof_of_A.
