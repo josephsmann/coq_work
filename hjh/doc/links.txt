@@ -17,3 +17,6 @@ https://github.com/coq/coq/wiki/MatchAsInReturn
 
 Functional programmingin Coq (aka Galina).
 https://www.seas.upenn.edu/~cis500/cis500-f13/sf/Basics.html
+
+Tactics:
+https://coq.inria.fr/refman/proof-engine/detailed-tactic-examples.html
